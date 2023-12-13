@@ -28,7 +28,6 @@ export default function Stop() {
 
   return (
     <>
-      <Hello />
       <h2>Success Page</h2>
       <button onClick={handleTrainMoreClick}>Train more</button>
       <button onClick={handleDatasetClick}>Go to Dataset</button>

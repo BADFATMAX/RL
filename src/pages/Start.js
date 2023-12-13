@@ -9,22 +9,21 @@ export default function Start() {
     )
 } */
 
-import Hello from '../components/Hello';
+// import Hello from '../components/Hello';
 
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 export default function Start() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    navigate('/dataset');
-  };
+  // const handleButtonClick = () => {
+  //   navigate('/dataset');
+  // };
 
   return (
     <>
-      <Hello />
       <h2>Start Page</h2>
-      <button onClick={handleButtonClick}>Go to Dataset</button>
+      {/* <button onClick={handleButtonClick}>Go to Dataset</button> */}
     </>
   );
 }

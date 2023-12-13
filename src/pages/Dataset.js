@@ -1,4 +1,4 @@
-import Hello from '../components/Hello';
+// import Hello from '../components/Hello';
 /* 
 export default function Dataset() {
     return (
@@ -9,20 +9,19 @@ export default function Dataset() {
     )
 } */
 
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 export default function Dataset() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    navigate('/result');
-  };
+  // const handleButtonClick = () => {
+  //   navigate('/result');
+  // };
 
   return (
     <>
-      <Hello />
       <h2>Load Dataset Page</h2>
-      <button onClick={handleButtonClick}>Go to Result</button>
+      {/* <button onClick={handleButtonClick}>Go to Result</button> */}
     </>
   );
 }

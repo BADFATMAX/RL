@@ -1,4 +1,4 @@
-import Hello from '../components/Hello';
+// import Hello from '../components/Hello';
 /*
 export default function Result() {
     return (
@@ -9,20 +9,19 @@ export default function Result() {
     )
 }*/
 
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 export default function Result() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleButtonClick = () => {
-    navigate('/stop');
-  };
+  // const handleButtonClick = () => {
+  //   navigate('/stop');
+  // };
 
   return (
     <>
-      <Hello />
       <h2>Graph Page</h2>
-      <button onClick={handleButtonClick}>Go to Stop</button>
+      {/* <button onClick={handleButtonClick}>Go to Stop</button> */}
     </>
   );
 }
