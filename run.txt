@@ -1,1 +1,3 @@
+setup_env.py
+
 uvicorn main:app --reload
