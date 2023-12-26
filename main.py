@@ -5,6 +5,7 @@ import subprocess as sp
 import os
 import sys
 import signal
+import shutil
 # import tempfile
 
 app = FastAPI()
@@ -29,7 +30,7 @@ def run_example(id: str):
             p.wait()
             fptr.close()
         del app.running_nns[id]
-        os.unlink(fp)   
+        print("training is stoped")
 
 
 @app.get("/")
@@ -70,24 +71,39 @@ def init(nn_task: str, dset: str = "custom", los:str = "custom", opt:str = "cust
 @app.get("/res/{nn_task}")
 def get_result(nn_task: Union[str, None] = None):
     print(app.running_nns)
-    if nn_task is None:
-        return {"None"}
-    else:
-        try:
-            nn =  app.running_nns[nn_task]
-            net = None
-            with open(nn["fptr"].name, "r") as fptr:
-                content = fptr.read()
-                try:
-                    net = content.split("RENDER!")[-1].split("/RENDER")[0]
-                except Exception:
-                    pass
+    fp = f"{id2fld(nn_task)}/out.tmp"
+    if os.path.exists(fp):
+        net = ""
+        with open(fp, "r") as fptr:
+            content = fptr.read()
+            if not ("RENDER" in content):
                 fptr.close()
-            return {"content": net}
-        except KeyError:
-            return {"None"}
+                return {"content": net}
+            try:
+                net = content.split("RENDER!")[-1].split("/RENDER")[0]
+            except Exception:
+                 pass
+        return {"content": net}
+    else:
+        return {"None"}
+    # if nn_task is None:
+    #     return {"None"}
+    # else:
+    #     try:
+    #         nn =  app.running_nns[nn_task]
+    #         net = None
+    #         with open(nn["fptr"].name, "r") as fptr:
+    #             content = fptr.read()
+    #             try:
+    #                 net = content.split("RENDER!")[-1].split("/RENDER")[0]
+    #             except Exception:
+    #                 pass
+    #             fptr.close()
+    #         return {"content": net}
+    #     except KeyError:
+    #         return {"None"}
 
-@app.get("/del/{nn_task}")
+@app.get("/stop/{nn_task}")
 def finish_nn(nn_task: Union[str, None] = None):
     print(app.running_nns)
     if nn_task is None:
@@ -100,6 +116,22 @@ def finish_nn(nn_task: Union[str, None] = None):
             
         except KeyError:
             return {"None"}
+
+@app.get("/delete/{nn_task}")
+def remove_task(nn_task: Union[str, None] = None):
+    print(app.running_nns)
+    if nn_task is None:
+        return {"None"}
+    try:
+        _ =  app.running_nns[nn_task]
+        print("task is running!")
+        return {"None"}
+    except KeyError:
+        fld = f"{id2fld(nn_task)}"
+        if os.path.exists(fld):
+            shutil.rmtree(fld)
+            return {"OK"}
+        return {"None"}
 
 
 

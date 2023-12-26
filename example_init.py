@@ -104,10 +104,25 @@ env = gymnasium.make('gym_env/env_v1', **env_params)
     # pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
 
 
+dirname = os.path.dirname(__file__)
+
+from stable_baselines3.common.callbacks import CheckpointCallback, EveryNTimesteps, BaseCallback
+# checkpoint_callback = CheckpointCallback(save_freq=1, save_path=f'{{dirname}}/logs/', name_prefix='ex_model')
+class CustomCallback(BaseCallback):
+    def __init__(self, verbose=0):
+        super(CustomCallback, self).__init__(verbose)
+    def _on_step(self) -> bool:
+        PPO.save(self.model, f'{{dirname}}/model')
+        if self.n_calls >= self.model._total_timesteps:
+            return False
+        else:
+            return True
+
+the_callback = CustomCallback()
+
 model = PPO("MultiInputPolicy", env, verbose=1)
 print(model)
-model.learn(1, progress_bar=True)
-# print(model.learn(total_timesteps=1))
+model.learn(total_timesteps=6, progress_bar=True, callback=the_callback)
 """)
     pass
     
