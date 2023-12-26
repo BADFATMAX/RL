@@ -34,3 +34,4 @@ __pycache__/
 #server other
 gym_env/
 data/
+*_nn_task/
