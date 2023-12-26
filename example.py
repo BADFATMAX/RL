@@ -5,6 +5,8 @@ import torch
 import gymnasium
 from stable_baselines3 import PPO
 
+# import pickle
+
 class myDataset(Dataset):
     def __init__(self, X, y):
 
@@ -69,6 +71,10 @@ env = gymnasium.make('gym_env/env_v1', **env_params)
 
 # Proximal Policy Optimization
 # doc: https://stable-baselines3.readthedocs.io/en/master/modules/ppo.html
+
+# with open("example.env", "wb") as f:
+    # pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
+
 
 model = PPO("MultiInputPolicy", env, verbose=1)
 print(model)
