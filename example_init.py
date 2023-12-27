@@ -112,6 +112,7 @@ class CustomCallback(BaseCallback):
     def __init__(self, verbose=0):
         super(CustomCallback, self).__init__(verbose)
     def _on_step(self) -> bool:
+        print(self.n_calls, self.model._total_timesteps)
         PPO.save(self.model, f'{{dirname}}/model')
         if self.n_calls >= self.model._total_timesteps:
             return False
@@ -122,7 +123,7 @@ the_callback = CustomCallback()
 
 model = PPO("MultiInputPolicy", env, verbose=1)
 print(model)
-model.learn(total_timesteps=6, progress_bar=True, callback=the_callback)
+model.learn(total_timesteps=7, progress_bar=True, callback=the_callback)
 """)
     pass
     
