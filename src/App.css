@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-color: rgb(192, 231, 231);
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 3rem;
+  top: 0;
+}
+
+.pageContent {
+  margin-left: 12%;
+}
+
+
+
+

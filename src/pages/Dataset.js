@@ -19,9 +19,7 @@ export default function Dataset() {
   // };
 
   return (
-    <>
       <h2>Load Dataset Page</h2>
-      {/* <button onClick={handleButtonClick}>Go to Result</button> */}
-    </>
+      // {/* <button onClick={handleButtonClick}>Go to Result</button> */}
   );
 }

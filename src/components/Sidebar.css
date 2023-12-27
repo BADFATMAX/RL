@@ -1,0 +1,29 @@
+.sidebar {
+    position: fixed;
+    width: 10%;
+    height: 100%;
+    /* background-image: url("aedcca77-ccf1-4e80-80e9-6efc13a35c90.png"); */
+    background-color: rgb(104, 141, 211);
+    margin: 0px;
+    padding: 0px;   
+    top: 0;
+    bottom: 0;
+  }
+  
+  .sidebar button{
+    text-align: center;
+    width: 80%;
+    padding: 1rem;
+    margin: 0.5rem;
+    /* border: 0.1rem solid; */
+    border-radius: 5px;
+    border-color: rgba(165, 42, 42, 0);
+    overflow: hidden;
+    background-color: rgb(204, 100, 204);
+    color: black;
+    /* margin: 1rem; */
+  }
+  
+  .sidebar button:hover {
+    background-color: rgb(161, 207, 114);  
+  }
