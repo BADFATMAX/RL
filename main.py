@@ -2,6 +2,7 @@ from typing import Union
 
 from fastapi import FastAPI, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 import subprocess as sp
 import os
 import sys
@@ -149,7 +150,13 @@ def remove_task(nn_task: Union[str, None] = None):
 def get_possible_datasets():
     return ["CIFAR10", "MNIST"]
 
-
+@app.get("/ex_download")
+async def read_item():
+    headers = {'Access-Control-Expose-Headers': 'Content-Disposition'}
+    try:
+        return FileResponse(f"./{id2fld('ex')}/model.zip", filename="model.zip", headers=headers)
+    except Exception:
+        return {"None"}
 
 
 @app.get("/items/{item_id}")
