@@ -44,6 +44,17 @@ async function stopNN(){
   }
 }
 
+async function removeNN(){
+  try{
+    let response = await fetch("http://127.0.0.1:8000/delete/ex");
+    sessionStorage.setItem("INITED", null);
+    window.location.reload();
+  }
+  catch(er){
+    alert(er);
+  }
+}
+
 export default function Init() {
   const [val, setDataset] = useState();
   const [options, setOptions] = useState([]);
@@ -54,10 +65,13 @@ export default function Init() {
     e.preventDefault();
     if (val && iterations){
       let checkStat = sessionStorage.getItem("INITED");
-      if (checkStat == null){
+      console.log("INITED: ", checkStat);
+      if (checkStat != true && checkStat != 'true'){
+        console.log("initing");
         sessionStorage.setItem("dataset", JSON.stringify(val[0]));
         sessionStorage.setItem("iterations", iterations);
         sessionStorage.setItem("INITED", true);
+        // console.log(sessionStorage.getItem("INITED"));
       }
       let response = await fetch("http://127.0.0.1:8000/ex_init");
       let raw = await response.json();
@@ -76,10 +90,14 @@ export default function Init() {
     let message = <></>;
     if (resp == "None")
       message = <p>The neural network has already been initialized</p>;
-    let runb = <button onClick={runNN}>Run!</button>
-    let stopb = <button onClick={stopNN}>Stop!</button>
-    if (iters && dataset){
-      return <>{message}{header}{runb}{stopb}</>;
+    let runb = <button onClick={runNN} className='btn1'>Run!</button>
+    let stopb = <button onClick={stopNN} className='btn1'>Stop</button>
+    let removeb = <button onClick={removeNN} className='btn1'>Remove</button>
+
+    let isinited = sessionStorage.getItem("INITED");
+    // console.log(iters, "   ", dataset, "  isinited: ", isinited);
+    if (iters && dataset && ( isinited== 'true' || isinited == true)){
+      return <>{message}{header}{removeb}{runb}{stopb}</>;
     }
     else
       return <></>;
@@ -93,11 +111,11 @@ export default function Init() {
       <form onSubmit={handleSubmit}>
         <label>
           <p>Number of iterations</p>
-          <input type='number' onChange={e => setIter(Number(e.target.value))}/>
+          <input type='number' className='inpt' onChange={e => setIter(Number(e.target.value))}/>
         </label>
-        <Select onDropdownOpen={() => {getPosDatasets().then((opts) => setOptions(opts));}} options={options} labelField="name" valueField="id" onChange={(values) => setDataset(values)} />
+        <Select className="" onDropdownOpen={() => {getPosDatasets().then((opts) => setOptions(opts));}} options={options} labelField="name" valueField="id" onChange={(values) => setDataset(values)} />
         <div>
-        <button type="submit">Submit</button>
+        <button type="submit" className='btn1'>Submit</button>
       </div>
       </form>
       <div>{initInfo()}</div>

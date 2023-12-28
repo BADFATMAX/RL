@@ -38,15 +38,34 @@
 }
 
 body {
-  background-color: rgb(192, 231, 231);
+  content: "";
+  /* background-color: rgb(192, 231, 231); */
+  background: url("../public/background.png");
+  background-size: cover;
+  /* background-color: ; */
+  /* opacity: 0.3; */
   margin: 0px;
   padding: 0px;
   padding-bottom: 3rem;
   top: 0;
 }
 
+/* body::before{
+  content: "";
+  background: url("../public/background.jpg");
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+} */
+
+
 .pageContent {
-  margin-left: 12%;
+  opacity: 1.0;
+  margin-top: 8%;
 }
 
 

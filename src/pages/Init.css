@@ -5,3 +5,38 @@
 .Init h1 {
     text-align: center;
 }
+
+.btn1{
+    text-align: center;
+    /* float: left; */
+    width: 15%;
+    padding: 0.7rem;
+    margin: 0.5rem;
+    /* border: 0.1rem solid; */
+    border-radius: 20px;
+    border-color: rgba(165, 42, 42, 0);
+    overflow: hidden;
+    background-color: rgba(26, 134, 217, 0.607);
+    color: black;
+    /* margin: 1rem; */
+  }
+  
+  .btn1:hover {
+    background-color: rgb(205, 92, 227);  
+  }
+
+  .inpt{
+    text-align: center;
+    float: left;
+    /* width: 15%; */
+    max-width: 50%;
+    padding: 0.7rem;
+    margin: 0.5rem;
+    border: 0.1rem solid;
+    border-radius: 20px;
+    border-color: rgba(165, 42, 42, 0);
+    /* overflow: hidden; */
+    background-color: rgba(26, 134, 217, 0.607);
+    color: black;
+
+  }
