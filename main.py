@@ -8,6 +8,8 @@ import os
 import sys
 import signal
 import shutil
+from viz import RenderToImage
+import cv2 as cv
 # import tempfile
 
 app = FastAPI()
@@ -82,23 +84,13 @@ def init(nn_task: str, dset: str = "custom", los:str = "custom", opt:str = "cust
     
 
 @app.get("/res/{nn_task}")
-def get_result(nn_task: Union[str, None] = None):
+async def get_result(nn_task: Union[str, None] = None):
     print(app.running_nns)
     fp = f"{id2fld(nn_task)}/out.tmp"
-    if os.path.exists(fp):
-        net = ""
-        with open(fp, "r") as fptr:
-            content = fptr.read()
-            if not ("RENDER" in content):
-                fptr.close()
-                return {"content": net}
-            try:
-                net = content.split("RENDER!")[-1].split("/RENDER")[0]
-            except Exception:
-                 pass
-        return {"content": net}
-    else:
-        return {"None"}
+    img = RenderToImage(fp)
+    print(img)
+    cv.imwrite("Net.jpg", img)
+    return FileResponse(f"Net.jpg")
     # if nn_task is None:
     #     return {"None"}
     # else:
